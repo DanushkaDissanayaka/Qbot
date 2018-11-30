@@ -84,7 +84,19 @@
     }
 
     void displayKp (void){
-        
+
+    }
+
+    void displayChangePID(void){
+        display.clearDisplay();
+        display.setTextSize(1);
+        display.setTextColor(WHITE);
+        display.setCursor(0,0);
+        display.println("1.Line Fllow");
+        display.println("2.wall Fllow");
+        display.println("3.Calibrate");
+        display.println("4.Change PID Values");
+        display.display();
     }
 
     void displayMainMenu(void){
