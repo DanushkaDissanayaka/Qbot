@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+// if there is error include linefollow.h
 
 #ifndef display_h
     #define display_h
@@ -83,8 +84,33 @@
         display.display();
     }
 
-    void displayKp (void){
+    void printValues (double value) {
+        display.clearDisplay();
+        display.setCursor(0,0);
+        display.print(value,4);
+        display.display();
+    }
 
+    void displayKp (void){
+        display.clearDisplay();
+        display.setTextSize(1);
+        display.setTextColor(WHITE);
+        display.setCursor(0,0);
+        display.println("Kp Value");
+        display.print(" Base Val ");
+        display.println(FULL_SPEED_Kp,4);
+        display.display();
+    }
+
+    void displayKd (void){
+        display.clearDisplay();
+        display.setTextSize(1);
+        display.setTextColor(WHITE);
+        display.setCursor(0,0);
+        display.println("Kd Value");
+        display.print(" Base Val ");
+        display.println(FULL_SPEED_Kd,4);
+        display.display();
     }
 
     void displayChangePID(void){
@@ -92,10 +118,8 @@
         display.setTextSize(1);
         display.setTextColor(WHITE);
         display.setCursor(0,0);
-        display.println("1.Line Fllow");
-        display.println("2.wall Fllow");
-        display.println("3.Calibrate");
-        display.println("4.Change PID Values");
+        display.println("1.Kp");
+        display.println("2.Kd");
         display.display();
     }
 

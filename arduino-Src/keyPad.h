@@ -33,7 +33,7 @@
                 return 'u';
             }
             else if(!digitalRead(BACK)){
-                delay(KEY_PRESS_DELAY);
+                delay(500);
                 return 'b';
             }
         }

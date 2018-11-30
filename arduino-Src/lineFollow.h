@@ -5,9 +5,9 @@
 
 // Full speed PID Values
 float thisvalue = 0.075;
-double FULL_SPEED_Kp = 0.074;
-#define FULL_SPEED_Kd 4
-#define FULL_SPEED_Ki 0
+double FULL_SPEED_Kp =  0.074;
+double FULL_SPEED_Kd =  0;
+#define FULL_SPEED_Ki   0
 
 // Half Speed PID values
 #define HALF_SPEED_Kp 0
