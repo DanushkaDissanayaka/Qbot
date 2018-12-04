@@ -41,7 +41,6 @@
     }
 
     void testKeypad(void){
-
         char key = getKey();
         if(key != 'n'){
         Serial.println(key);

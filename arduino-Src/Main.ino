@@ -7,6 +7,7 @@
 #include "keyPad.h"
 #include "dispaly.h"
 #include "menu.h"
+#include "irSensor.h"
 
 void setup() {
     sensorInit();
@@ -15,36 +16,69 @@ void setup() {
     keypadInit();
     dispalyInit();
     displayMainMenu();
+    irSensorInit();
     //calibrateSensorArray();
     //delay(5000);
 }
 
 void loop() {
-  //testIndicators();
-  //testDistanceSensor();
- //testMotors();
- //testSensorArray();
- //fullSpeedLineFollowBlackStrip();
- //fullSpeedRightWallFollow();
- //displayTest();
+    //testparts();
+    withMenu();
+}
 
- /*while(1){
-    //do nothing...
- }*/
- char key = getKey();
+void doTask(){
+
+    fullSpeedLineFollowBlackStrip();
+    delay(100);
+    Stop();
+    fullSpeedLineFollowWhiteStrip();
+    fullSpeedLineFollowWhiteStrip();
+    Stop();
+    speedControl(255,255);
+    turnLeft();
+    delay(150);
+    Stop();
+    fullSpeedLineFollowWhiteStrip();
+}
+
+void testparts(void){
+    /*testIndicators();
+    testDistanceSensor();
+    testMotors();
+    testSensorArray();
+    fullSpeedLineFollowBlackStrip();
+    fullSpeedRightWallFollow();
+    displayTest();*/
+    testIrSensor();
+}
+
+void withMenu(void){
+    char key = getKey();
 
  if(key != 'n'){
+
      if(key == 's' ){
          displayLIneFllow();
          LineFollowMenu();
          displayMainMenu();
-     }
+        }
 
         if(key == 'u' ){
             displayText("Tuning");
             calibrateSensorArray();
             displayMainMenu();
         }
+
+        if(key == 'b' ){
+            displayText("Task");
+            doTask();
+            displayMainMenu();
+        }
+
+        if(key == 'd' ){
+            displayText("Wall Fllowing");
+            fullSpeedRightWallFollow();
+            displayMainMenu();
+        }
  }
- 
 }

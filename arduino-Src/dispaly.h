@@ -74,16 +74,6 @@
         display.clearDisplay();
     }
 
-    void displayText(String text){
-        display.clearDisplay();
-        display.setTextSize(1);
-        display.setTextColor(WHITE);
-        display.setCursor(0,0);
-        display.println(text);
-        //display.println("3.Calibrate");
-        display.display();
-    }
-
     void printValues (double value) {
         display.clearDisplay();
         display.setCursor(0,0);
@@ -108,7 +98,7 @@
         display.setTextColor(WHITE);
         display.setCursor(0,0);
         display.println("Kd Value");
-        display.print(" Base Val ");
+        display.print("Base Val ");
         display.println(FULL_SPEED_Kd,4);
         display.display();
     }
@@ -118,8 +108,8 @@
         display.setTextSize(1);
         display.setTextColor(WHITE);
         display.setCursor(0,0);
-        display.println("1.Kp");
-        display.println("2.Kd");
+        display.println("1.Change Kp");
+        display.println("2.Change Kd");
         display.display();
     }
 
@@ -129,9 +119,9 @@
         display.setTextColor(WHITE);
         display.setCursor(0,0);
         display.println("1.Line Fllow");
-        display.println("2.wall Fllow");
+        display.println("2.Wall Fllow");
         display.println("3.Calibrate");
-        display.println("4.Change PID Values");
+        display.println("4.Do Task");
         display.display();
     }
     void displayLIneFllow(){
@@ -141,7 +131,15 @@
         display.setCursor(0,0);
         display.println("1.Line Fllow");
         display.println("2.ChangPid");
-        //display.println("3.Calibrate");
+        display.display();
+    }
+       void displayText(String text){
+
+        display.clearDisplay();
+        display.setTextSize(1);
+        display.setTextColor(WHITE);
+        display.setCursor(0,0);
+        display.println(text);
         display.display();
     }
 #endif

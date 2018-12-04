@@ -13,7 +13,7 @@
 
   void calibrateSensorArray(void){
       beep(1,500);                    // Make beep sound before Start calibrate
-      for (int i = 0; i < 400; i++)  // make the calibration take about 10 seconds
+      for (int i = 0; i < 250; i++)  // make the calibration take about 10 seconds
     {
       qtra.calibrate();             // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
     }

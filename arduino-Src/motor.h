@@ -16,6 +16,8 @@
   #define  halfMotorSpeed  180
   #define  halfBaseSpeed   120
 
+  #define STOP_SPEED  80
+  
   int    leftMotorSpeed  = 0;
   int    rightMotorSpeed = 0;
 
@@ -28,16 +30,24 @@
       pinMode(speedPinRight, OUTPUT);
   }
 
-  void forward(void)
-  {
+    void speedControl (uint16_t lSpeed , uint16_t rSpeed){
+    analogWrite(speedPinLeft, lSpeed);
+    analogWrite(speedPinRight, rSpeed);
+  }
+
+   void normalSpeed(void){
+    analogWrite (speedPinLeft, 255);
+    analogWrite (speedPinRight, 255);
+  }
+
+  void forward(void){
     digitalWrite (leftPin1, HIGH);
     digitalWrite (leftPin2, LOW);
     digitalWrite (rightPin1, HIGH);
     digitalWrite (rightPin2, LOW);
   }
 
-  void backward(void)
-  {
+  void backward(void){
     digitalWrite (leftPin1, LOW);
     digitalWrite (leftPin2, HIGH);
     digitalWrite (rightPin1, LOW);
@@ -59,21 +69,35 @@
   }
 
   void Stop (void){
+    speedControl(STOP_SPEED,STOP_SPEED);
     digitalWrite (leftPin1, LOW);
     digitalWrite (leftPin2, LOW);
     digitalWrite (rightPin1, LOW);
     digitalWrite (rightPin2, LOW);
   }
 
-  void normalSpeed(void){
-    analogWrite (speedPinLeft, 255);
-    analogWrite (speedPinRight, 255);
+  void freeforward (void){
+    normalSpeed();
+    forward();
   }
 
-  void speedControl (uint16_t lSpeed , uint16_t rSpeed)
-  {
-    analogWrite(speedPinLeft, lSpeed);
-    analogWrite(speedPinRight, rSpeed);
+  void freeBackward (void){
+    normalSpeed();
+    backward();
+  }
+
+  void FreeRotateLeft(uint16_t time){
+    normalSpeed();
+    turnLeft();
+    delay(time);
+    Stop();
+  }
+
+  void FreeRotateRight(uint16_t time){
+    normalSpeed();
+    turnRight();
+    delay(time);
+    Stop();
   }
 
   void testMotors(){
