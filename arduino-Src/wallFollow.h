@@ -5,8 +5,8 @@
 #define WALL_FLLOW_DEBUG    false
 
 // Full speed PID Values
-#define WALL_FULL_SPEED_Kp 4
-#define WALL_FULL_SPEED_Kd 150
+double WALL_FULL_SPEED_Kp = .300;
+double WALL_FULL_SPEED_Kd = 0;
 #define WALL_FULL_SPEED_Ki 0
 
 // Half Speed PID values
@@ -27,46 +27,43 @@ int             walLastError    = 0;
 int             WallMotorSpeed  = 0;
 
 void calPidWall (float Kp , float Kd , float Ki , unsigned int    position){
-    wallError = position - WALL_POSITION;
+    wallError = position;
     wallI = wallI + wallError;
     WallMotorSpeed = (Kp * wallError) + (Kd * (wallError - walLastError)) + wallI*Ki;
     walLastError = wallError;
 }
 
-void fullSpeedRightWallFollow(void){
+void fullSpeedWallFollow(void){
     
     while(1){
 
         frontDistance = getDistance(FRONT);
-        //leftDistance  = getDistance(LEFT); // We dont need get left distance since we are fllowing right wall
+        leftDistance  = getDistance(LEFT);
         rightDistance = getDistance(RIGHT);
 
-        calPidWall(WALL_FULL_SPEED_Kp,WALL_FULL_SPEED_Kd,WALL_FULL_SPEED_Ki,rightDistance); // calculate pid For left and right motors
+        calPidWall(WALL_FULL_SPEED_Kp,WALL_FULL_SPEED_Kd,WALL_FULL_SPEED_Ki,rightDistance-leftDistance); // calculate pid For left and right motors
         rightMotorSpeed = FULL_BASE_SPEED_RIGHT + WallMotorSpeed;
         leftMotorSpeed =  FULL_BASE_SPEED_LEFT  - WallMotorSpeed;
 
         if (rightMotorSpeed > FULL_MOTOR_SPEED_RIGHT )  rightMotorSpeed = FULL_MOTOR_SPEED_RIGHT; // prevent the motor from going beyond max speed
         if (leftMotorSpeed >  FULL_MOTOR_SPEED_LEFT )   leftMotorSpeed  = FULL_MOTOR_SPEED_LEFT; // prevent the motor from going beyond max speed
-        if (rightMotorSpeed < 0) rightMotorSpeed = 0; // keep the motor speed positive
-        if (leftMotorSpeed < 0) leftMotorSpeed = 0; // keep the motor speed positive   
+        if (rightMotorSpeed < 70) rightMotorSpeed = 70; // keep the motor speed positive
+        if (leftMotorSpeed < 70) leftMotorSpeed = 70; // keep the motor speed positive   
+
 
         
-        if (frontDistance == 0 && rightDistance == 0) { // check if there is availabe for anay wall if not break the loop
-            break;
+        if (rightDistance == 0 && leftDistance == 0) { 
+            break; // We have found a junction or dedend
         }
         
         if(2 < frontDistance && frontDistance < FRONT_MIN_DISTANCE ){
-            speedControl(160,160);
-            turnRight();
-            delay(200);
-            Stop();
-            delay(5000);
+           beep(2,100);
         }
 
         else
         {
             if (WALL_FLLOW_DEBUG) {
-                Serial.print(rightDistance);
+                Serial.print(rightDistance - leftDistance);
                 Serial.print("\t");
                 Serial.print(wallError);
                 Serial.print("\t");
@@ -82,7 +79,9 @@ void fullSpeedRightWallFollow(void){
             }
         }
     }
-    backward();
-    Stop(); // stop both motors after wall Follow
+    speedControl(255,255);
+        backward();
+        delay(BACKWORD_STOP_DELAY);
+        Stop(); // stop both motors after wall Follow
     beep(2,250);
 }

@@ -29,4 +29,9 @@
             rightDetect =false;
         }
     }
+
+    void clear_ISR_Verialble(void){
+        leftDetect = false;
+        rightDetect = false;
+    }
 #endif

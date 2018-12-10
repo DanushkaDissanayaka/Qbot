@@ -8,6 +8,7 @@
 #include "dispaly.h"
 #include "menu.h"
 #include "irSensor.h"
+#include "mazeSolve.h"
 
 void setup() {
     sensorInit();
@@ -22,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-    //testparts();
+    // testparts();
     withMenu();
 }
 
@@ -42,14 +43,14 @@ void doTask(){
 }
 
 void testparts(void){
-    /*testIndicators();
+    // testIndicators();
     testDistanceSensor();
-    testMotors();
-    testSensorArray();
-    fullSpeedLineFollowBlackStrip();
-    fullSpeedRightWallFollow();
-    displayTest();*/
-    testIrSensor();
+    // testMotors();
+    // testSensorArray();
+    // fullSpeedLineFollowBlackStrip();
+    // fullSpeedRightWallFollow();
+    // displayTest();
+    // testIrSensor();
 }
 
 void withMenu(void){
@@ -63,21 +64,21 @@ void withMenu(void){
          displayMainMenu();
         }
 
-        if(key == 'u' ){
+        if(key == 'b' ){
             displayText("Tuning");
             calibrateSensorArray();
             displayMainMenu();
         }
 
-        if(key == 'b' ){
-            displayText("Task");
-            doTask();
+        if(key == 'u' ){
+            displayWallFllow();
+            WallFollowMenu();
             displayMainMenu();
         }
 
         if(key == 'd' ){
-            displayText("Wall Fllowing");
-            fullSpeedRightWallFollow();
+            displayText("solving maze");
+            solveMaze();
             displayMainMenu();
         }
  }

@@ -13,6 +13,11 @@
   #define FULL_BASE_SPEED_RIGHT   200
   #define FULL_BASE_SPEED_LEFT    200
 
+  #define WALL_MOTOR_SPEED_LEFT   255
+  #define WALL_MOTOR_SPEED_RIGHT  255
+  #define WALL_BASE_SPEED_RIGHT   200
+  #define WALL_BASE_SPEED_LEFT    200
+
   #define  halfMotorSpeed  180
   #define  halfBaseSpeed   120
 
@@ -76,9 +81,11 @@
     digitalWrite (rightPin2, LOW);
   }
 
-  void freeforward (void){
+  void freeforward (uint16_t time){
     normalSpeed();
     forward();
+    delay(time);
+    Stop();
   }
 
   void freeBackward (void){

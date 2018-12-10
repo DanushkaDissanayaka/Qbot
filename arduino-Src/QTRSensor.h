@@ -4,7 +4,8 @@
 #ifndef QTRSensor_h
   #define QTRSensor_h
   #define NUM_SENSORS             8  // number of sensors used
-  #define NUM_SAMPLES_PER_SENSOR  4  // average 4 analog samples per sensor reading
+  #define NUM_SAMPLES_PER_SENSOR  4
+    // average 4 analog samples per sensor reading
   #define EMITTER_PIN             50  // emitter is controlled by digital pin 50
 
   // sensors 0 through 7 are connected to analog inputs 0 through 7, respectively
