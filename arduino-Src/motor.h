@@ -13,15 +13,15 @@
   #define FULL_BASE_SPEED_RIGHT   200
   #define FULL_BASE_SPEED_LEFT    200
 
-  #define WALL_MOTOR_SPEED_LEFT   255
-  #define WALL_MOTOR_SPEED_RIGHT  255
-  #define WALL_BASE_SPEED_RIGHT   200
-  #define WALL_BASE_SPEED_LEFT    200
+  #define WALL_MOTOR_SPEED_LEFT   200
+  #define WALL_MOTOR_SPEED_RIGHT  200
+  #define WALL_BASE_SPEED_RIGHT   140
+  #define WALL_BASE_SPEED_LEFT    140
 
   #define  halfMotorSpeed  180
   #define  halfBaseSpeed   120
 
-  #define STOP_SPEED  80
+  #define STOP_SPEED  10
   
   int    leftMotorSpeed  = 0;
   int    rightMotorSpeed = 0;

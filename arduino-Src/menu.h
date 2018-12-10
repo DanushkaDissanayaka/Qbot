@@ -26,11 +26,11 @@ void changeKd(){
      while (pressedKey != 'b'){
         pressedKey = getKey();
         if(pressedKey == 'd' ){
-            FULL_SPEED_Kd -= 0.01;
+            FULL_SPEED_Kd -= 0.1;
             printValues(FULL_SPEED_Kd);
         }
         if(pressedKey == 'u' ){
-            FULL_SPEED_Kd += 0.01;
+            FULL_SPEED_Kd += 0.1;
             printValues(FULL_SPEED_Kd);
         }
         if(pressedKey == 's' ){

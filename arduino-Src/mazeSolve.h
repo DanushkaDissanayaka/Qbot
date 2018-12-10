@@ -6,7 +6,6 @@
 
 #ifndef mazeSolve_h
     #define mazeSolve_h
-
     #define FORWARD_TIME        100
     #define MAZE_SOLVE_DEBUG    true
     #define LEFT_TURN           1
@@ -74,6 +73,10 @@
             return BACK_TURN;
     }
     void makeTurn(uint8_t turn){
-
+        
+        if (turn) {
+            
+        }
+        
     }
 #endif

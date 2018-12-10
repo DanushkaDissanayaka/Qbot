@@ -18,12 +18,12 @@ void setup() {
     dispalyInit();
     displayMainMenu();
     irSensorInit();
-    //calibrateSensorArray();
+    calibrateSensorArray();
     //delay(5000);
 }
 
 void loop() {
-    // testparts();
+    //testparts();
     withMenu();
 }
 
@@ -44,7 +44,7 @@ void doTask(){
 
 void testparts(void){
     // testIndicators();
-    testDistanceSensor();
+    // testDistanceSensor();
     // testMotors();
     // testSensorArray();
     // fullSpeedLineFollowBlackStrip();
@@ -71,14 +71,16 @@ void withMenu(void){
         }
 
         if(key == 'u' ){
-            displayWallFllow();
-            WallFollowMenu();
+            // displayWallFllow();
+            // WallFollowMenu();
+            BlackLineTurnRight();
             displayMainMenu();
         }
 
         if(key == 'd' ){
             displayText("solving maze");
-            solveMaze();
+            //solveMaze();
+            BlackLinetTurnLeft();
             displayMainMenu();
         }
  }

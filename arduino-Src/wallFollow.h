@@ -5,8 +5,8 @@
 #define WALL_FLLOW_DEBUG    false
 
 // Full speed PID Values
-double WALL_FULL_SPEED_Kp = .300;
-double WALL_FULL_SPEED_Kd = 0;
+double WALL_FULL_SPEED_Kp = .289;
+double WALL_FULL_SPEED_Kd = 30.2;
 #define WALL_FULL_SPEED_Ki 0
 
 // Half Speed PID values
@@ -42,13 +42,13 @@ void fullSpeedWallFollow(void){
         rightDistance = getDistance(RIGHT);
 
         calPidWall(WALL_FULL_SPEED_Kp,WALL_FULL_SPEED_Kd,WALL_FULL_SPEED_Ki,rightDistance-leftDistance); // calculate pid For left and right motors
-        rightMotorSpeed = FULL_BASE_SPEED_RIGHT + WallMotorSpeed;
-        leftMotorSpeed =  FULL_BASE_SPEED_LEFT  - WallMotorSpeed;
+        rightMotorSpeed = WALL_BASE_SPEED_RIGHT + WallMotorSpeed;
+        leftMotorSpeed =  WALL_BASE_SPEED_LEFT  - WallMotorSpeed;
 
-        if (rightMotorSpeed > FULL_MOTOR_SPEED_RIGHT )  rightMotorSpeed = FULL_MOTOR_SPEED_RIGHT; // prevent the motor from going beyond max speed
-        if (leftMotorSpeed >  FULL_MOTOR_SPEED_LEFT )   leftMotorSpeed  = FULL_MOTOR_SPEED_LEFT; // prevent the motor from going beyond max speed
-        if (rightMotorSpeed < 70) rightMotorSpeed = 70; // keep the motor speed positive
-        if (leftMotorSpeed < 70) leftMotorSpeed = 70; // keep the motor speed positive   
+        if (rightMotorSpeed > WALL_MOTOR_SPEED_RIGHT )  rightMotorSpeed = WALL_MOTOR_SPEED_RIGHT; // prevent the motor from going beyond max speed
+        if (leftMotorSpeed >  WALL_MOTOR_SPEED_LEFT )   leftMotorSpeed  = WALL_MOTOR_SPEED_LEFT; // prevent the motor from going beyond max speed
+        if (rightMotorSpeed < 0) rightMotorSpeed = 0; // keep the motor speed positive
+        if (leftMotorSpeed < 0) leftMotorSpeed = 0; // keep the motor speed positive   
 
 
         

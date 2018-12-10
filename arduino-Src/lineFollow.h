@@ -7,11 +7,12 @@
     #define LINE_FLLOW_DEBUG    false
 
     // Full speed PID Values
-    double FULL_SPEED_Kp =  0.340;//0.080; 0.340
-    double FULL_SPEED_Kd =  1.710;//0.890; 1.71
+    double FULL_SPEED_Kp =  0.158;//0.080; 0.340
+    double FULL_SPEED_Kd =  17;//0.890; 1.71
     #define FULL_SPEED_Ki   0
 
-    #define BACKWORD_STOP_DELAY 100
+    #define BACKWORD_STOP_DELAY     100
+    #define ROTATE_STOP_DELAY       0
 
     // Half Speed PID values
     #define HALF_SPEED_Kp 0
@@ -23,8 +24,8 @@
     #define MAX_VALUE       600
 
     //turning speed values
-    #define TURN_SPEED      200
-    #define TUNING_SPEED    160
+    #define TURN_SPEED      120
+    #define TUNING_SPEED    80
 
     int             error       = 0;
     int             I           = 0;
@@ -148,7 +149,7 @@
 
         position = qtra.readLine(sensorValues);
 
-         while(sensorValues[1] > MAX_VALUE || sensorValues[0] > MAX_VALUE){
+         while(sensorValues[0] < MIN_VALUE){
              position = qtra.readLine(sensorValues);
              speedControl(TURN_SPEED,TURN_SPEED);
          }
@@ -157,5 +158,15 @@
 
     void BlackLineTurnRight(void){
         //turn right with line referance
+        speedControl(0,0);
+        turnRight();
+
+        position = qtra.readLine(sensorValues);
+
+         while(sensorValues[7] < MIN_VALUE){
+             position = qtra.readLine(sensorValues);
+             speedControl(TURN_SPEED,TURN_SPEED);
+         }
+         Stop();
     }
 #endif
