@@ -101,8 +101,9 @@
                 // check there is a dedend and we have wall to fllow
                 if(dir == 'B' &&  getDistance(LEFT) != 0 && getDistance(RIGHT) != 0){
                     fullSpeedWallFollow();
-                    // freeforward(1000);
-                    // fullSpeedWallFollow();
+                    freeforward(1000);
+                    fullSpeedWallFollow();
+                    fullSpeedLineFollowBlackStrip();
                     break;
                 }
                 // Make the turn indicated by the path.
