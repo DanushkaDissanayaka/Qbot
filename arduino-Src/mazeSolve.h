@@ -1,4 +1,5 @@
 #include "lineFollow.h"
+//#include "wallFollow.h"
 #include "indicators.h"
 #include "irSensor.h"
 #include "motor.h"
@@ -98,6 +99,12 @@
                 dir = select_turn(leftDetect,straightDetect,rightDetect);
                 //Select turn according to sensor readingd
                 // check there is a dedend and we have wall to fllow
+                if(dir == 'B' &&  getDistance(LEFT) != 0 && getDistance(RIGHT) != 0){
+                    fullSpeedWallFollow();
+                    // freeforward(1000);
+                    // fullSpeedWallFollow();
+                    break;
+                }
                 // Make the turn indicated by the path.
                 turn(dir);
             } 
