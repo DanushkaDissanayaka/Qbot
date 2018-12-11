@@ -41,8 +41,8 @@
   }
 
    void normalSpeed(void){
-    analogWrite (speedPinLeft, 255);
-    analogWrite (speedPinRight, 255);
+    analogWrite (speedPinLeft, 120);
+    analogWrite (speedPinRight, 120);
   }
 
   void forward(void){

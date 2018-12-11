@@ -8,10 +8,10 @@
 
     // Full speed PID Values
     double FULL_SPEED_Kp =  0.158;//0.080; 0.340
-    double FULL_SPEED_Kd =  17;//0.890; 1.71
+    double FULL_SPEED_Kd =  20;//0.890; 1.71
     #define FULL_SPEED_Ki   0
 
-    #define BACKWORD_STOP_DELAY     100
+    #define BACKWORD_STOP_DELAY     50
     #define ROTATE_STOP_DELAY       0
 
     // Half Speed PID values
@@ -25,7 +25,7 @@
 
     //turning speed values
     #define TURN_SPEED      120
-    #define TUNING_SPEED    80
+    #define TUNING_SPEED    100
 
     int             error       = 0;
     int             I           = 0;
@@ -82,7 +82,7 @@
                 speedControl(leftMotorSpeed,rightMotorSpeed); // change motor speed according PID values
             }
         }
-        speedControl(255,255);
+        speedControl(100,100);
         backward();
         delay(BACKWORD_STOP_DELAY);
         Stop(); // stop both motors after line Follow
@@ -143,30 +143,49 @@
     }
 
     void BlackLinetTurnLeft(void){
-        // turn left with line referance
-        speedControl(0,0);
-        turnLeft();
-
-        position = qtra.readLine(sensorValues);
-
-         while(sensorValues[0] < MIN_VALUE){
-             position = qtra.readLine(sensorValues);
-             speedControl(TURN_SPEED,TURN_SPEED);
-         }
-         Stop();
-    }
-
-    void BlackLineTurnRight(void){
         //turn right with line referance
         speedControl(0,0);
         turnRight();
 
         position = qtra.readLine(sensorValues);
 
-         while(sensorValues[7] < MIN_VALUE){
+         while(sensorValues[6] < MIN_VALUE){
              position = qtra.readLine(sensorValues);
              speedControl(TURN_SPEED,TURN_SPEED);
          }
+
+            speedControl(0,0);
+            turnRight();
+            position = qtra.readLine(sensorValues);
+
+            while(sensorValues[6] > MAX_VALUE && sensorValues[3] < MIN_VALUE){
+             position = qtra.readLine(sensorValues);
+             speedControl(TUNING_SPEED,TUNING_SPEED);
+            }
+         Stop();
+    }
+
+    void BlackLineTurnRight(void){
+            // turn left with line referance
+        speedControl(0,0);
+        turnLeft();
+
+        position = qtra.readLine(sensorValues);
+
+         while(sensorValues[1] < MIN_VALUE){
+             position = qtra.readLine(sensorValues);
+             speedControl(TURN_SPEED,TURN_SPEED);
+         }
+
+        speedControl(0,0);
+        turnLeft();
+        position = qtra.readLine(sensorValues);
+
+            while(sensorValues[1] > MAX_VALUE && sensorValues[4] < MIN_VALUE){
+             position = qtra.readLine(sensorValues);
+             speedControl(TUNING_SPEED,TUNING_SPEED);
+            }
+
          Stop();
     }
 #endif

@@ -71,16 +71,16 @@ void withMenu(void){
         }
 
         if(key == 'u' ){
-            // displayWallFllow();
-            // WallFollowMenu();
-            BlackLineTurnRight();
+            displayWallFllow();
+            WallFollowMenu();
+            // BlackLineTurnRight();
             displayMainMenu();
         }
 
         if(key == 'd' ){
             displayText("solving maze");
-            //solveMaze();
-            BlackLinetTurnLeft();
+            solveMaze();
+            // BlackLinetTurnLeft();
             displayMainMenu();
         }
  }
