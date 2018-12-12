@@ -7,12 +7,16 @@
     #define RIGHT_ECHO_PIN      23
     #define RIGHT_TRIG_PIN      25
 
+    #define FRONT_RIGHT_ECHO_PIN      52
+    #define FRONT_RIGHT_TRIG_PIN      50
+
     #define FRONT_ECHO_PIN      27
     #define FRONT_TRIG_PIN      29
 
-    #define LEFT    1
-    #define RIGHT   2
-    #define FRONT   3
+    #define LEFT        1
+    #define RIGHT       2
+    #define FRONT       3
+    #define FRONT_RIGHT 4
 
     void sensorInit(){
         pinMode(LEFT_TRIG_PIN,OUTPUT);
@@ -23,6 +27,9 @@
 
         pinMode(FRONT_TRIG_PIN,OUTPUT);
         pinMode(FRONT_ECHO_PIN,INPUT);
+
+        pinMode(FRONT_RIGHT_TRIG_PIN,OUTPUT);
+        pinMode(FRONT_RIGHT_ECHO_PIN,INPUT);
     }
 
     void createPulse(uint8_t pin){
@@ -39,19 +46,24 @@
         {
             case LEFT:
                 createPulse(LEFT_TRIG_PIN);
-                return pulseIn(LEFT_ECHO_PIN,HIGH,MAX_DISTANCE);
+                return pulseIn(LEFT_ECHO_PIN,HIGH,MAX_DISTANCE)/29/2;
                 // get Left Distance
 
             case RIGHT:
                 createPulse(RIGHT_TRIG_PIN);
-                return pulseIn(RIGHT_ECHO_PIN,HIGH,MAX_DISTANCE);
+                return pulseIn(RIGHT_ECHO_PIN,HIGH,MAX_DISTANCE)/29/2;
                 // get Right Distance
                 
             case FRONT:
                 createPulse(FRONT_TRIG_PIN);
-                return pulseIn(FRONT_ECHO_PIN,HIGH,1200);
+                return pulseIn(FRONT_ECHO_PIN,HIGH,MAX_DISTANCE)/29/2;
                 // get Front Distance
-                
+
+            case FRONT_RIGHT:
+                createPulse(FRONT_RIGHT_TRIG_PIN);
+                return pulseIn(FRONT_RIGHT_ECHO_PIN,HIGH)/29/2;
+                // get FRONT_RIGHT Distance
+
             default:
                 // do noting
                 return -1;
@@ -61,9 +73,10 @@
     void testDistanceSensor(){
 
         Serial.print("Distance "); 
-        Serial.print('\t'); Serial.print("Left: "); Serial.print(getDistance(LEFT));
+        Serial.print('\t'); Serial.print("LEFT: "); Serial.print(getDistance(LEFT));
         Serial.print('\t'); Serial.print("FRONT: "); Serial.print(getDistance(FRONT));
         Serial.print('\t'); Serial.print("RIGHT: "); Serial.print(getDistance(RIGHT));
+        Serial.print('\t'); Serial.print("FRONT RIGHT: "); Serial.print(getDistance(FRONT_RIGHT));
         Serial.println();
     }
 #endif

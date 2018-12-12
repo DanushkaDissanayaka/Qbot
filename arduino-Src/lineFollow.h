@@ -11,8 +11,8 @@
     double FULL_SPEED_Kd =  20;//0.890; 1.71
     #define FULL_SPEED_Ki   0
 
-    #define BACKWORD_STOP_DELAY     50
-    #define ROTATE_STOP_DELAY       0
+    #define BACKWORD_STOP_DELAY     80 // no need
+    #define ROTATE_STOP_DELAY       40
 
     // Half Speed PID values
     #define HALF_SPEED_Kp 0
@@ -32,6 +32,7 @@
     int             lastError   = 0;
     int             motorSpeed  = 0;
     unsigned int    position    = 0;
+    bool junctionDetect = false;
 
     void calPid (float Kp , float Kd , float Ki){
         position = qtra.readLine(sensorValues);
@@ -53,10 +54,11 @@
                 //backToLine();
                 break;
             }
-            if(sensorValues[0] > MAX_VALUE &&sensorValues[1] > MAX_VALUE && sensorValues[2] > MAX_VALUE && sensorValues[3] > MAX_VALUE && sensorValues[4] > MAX_VALUE && sensorValues[5] > MAX_VALUE && sensorValues[6] > MAX_VALUE && sensorValues[7] > MAX_VALUE){
+            /*if(sensorValues[0] > MAX_VALUE &&sensorValues[1] > MAX_VALUE && sensorValues[2] > MAX_VALUE && sensorValues[3] > MAX_VALUE && sensorValues[4] > MAX_VALUE && sensorValues[5] > MAX_VALUE && sensorValues[6] > MAX_VALUE && sensorValues[7] > MAX_VALUE){
                 break; // found our solution
-            }
+            }*/
             if (leftDetect || rightDetect){
+                junctionDetect = true;
                 break; // found a junction
             }
             rightMotorSpeed = FULL_BASE_SPEED_RIGHT - motorSpeed;
@@ -82,10 +84,7 @@
                 speedControl(leftMotorSpeed,rightMotorSpeed); // change motor speed according PID values
             }
         }
-        speedControl(100,100);
-        backward();
-        delay(BACKWORD_STOP_DELAY);
-        Stop(); // stop both motors after line Follow
+        //ForwordBreak();
     }
 
     void fullSpeedLineFollowWhiteStrip(void){
@@ -162,7 +161,9 @@
              position = qtra.readLine(sensorValues);
              speedControl(TUNING_SPEED,TUNING_SPEED);
             }
-         Stop();
+        turnLeft();
+        delay(ROTATE_STOP_DELAY);
+        Stop();
     }
 
     void BlackLineTurnRight(void){
@@ -185,7 +186,8 @@
              position = qtra.readLine(sensorValues);
              speedControl(TUNING_SPEED,TUNING_SPEED);
             }
-
-         Stop();
+        turnRight();
+        delay(ROTATE_STOP_DELAY);
+        Stop();
     }
 #endif

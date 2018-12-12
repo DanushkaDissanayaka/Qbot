@@ -90,7 +90,7 @@ void changeWallKp(){
      while (pressedKey != 'b'){
         pressedKey = getKey();
         if(pressedKey == 'd' ){
-            WALL_FULL_SPEED_Kp -= 0.001;
+            WALL_FULL_SPEED_Kp -= 0.1;
             printValues(WALL_FULL_SPEED_Kp);
         }
         if(pressedKey == 's' ){
@@ -98,7 +98,7 @@ void changeWallKp(){
             printValues(WALL_FULL_SPEED_Kp);
         }
         if(pressedKey == 'u' ){
-            WALL_FULL_SPEED_Kp += 0.001;
+            WALL_FULL_SPEED_Kp += 0.1;
             printValues(WALL_FULL_SPEED_Kp);
         }
     }
@@ -109,11 +109,11 @@ void changeWallKd(){
      while (pressedKey != 'b'){
         pressedKey = getKey();
         if(pressedKey == 'd' ){
-            WALL_FULL_SPEED_Kd -= 0.10;
+            WALL_FULL_SPEED_Kd -= 1;
             printValues(WALL_FULL_SPEED_Kd);
         }
         if(pressedKey == 'u' ){
-            WALL_FULL_SPEED_Kd += 0.10;
+            WALL_FULL_SPEED_Kd += 1;
             printValues(WALL_FULL_SPEED_Kd);
         }
         if(pressedKey == 's' ){
@@ -158,7 +158,8 @@ void WallFollowMenu(){
 
             if(pressedKey == 's' ){
                 displayText("Wall Fllowing now");
-                fullSpeedWallFollow();
+                //fullSpeedWallFollow();
+                WallFollowing();
                 displayWallFllow();
             }
             if(pressedKey == 'd' ){

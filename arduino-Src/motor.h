@@ -22,6 +22,10 @@
   #define  halfBaseSpeed   120
 
   #define STOP_SPEED  10
+  #define BREAK_DELAY 80
+
+  #define ROTATION_90         300
+  #define ROTATION_180        500
   
   int    leftMotorSpeed  = 0;
   int    rightMotorSpeed = 0;
@@ -41,8 +45,8 @@
   }
 
    void normalSpeed(void){
-    analogWrite (speedPinLeft, 100);
-    analogWrite (speedPinRight, 120);
+    analogWrite (speedPinLeft, 120);
+    analogWrite (speedPinRight, 162);
   }
 
   void forward(void){
@@ -105,6 +109,13 @@
     turnRight();
     delay(time);
     Stop();
+  }
+
+  void ForwordBreak(void){
+    speedControl(255,255);
+    backward();
+    delay(BREAK_DELAY);
+    Stop(); // stop both motors after line Follow
   }
 
   void testMotors(){
