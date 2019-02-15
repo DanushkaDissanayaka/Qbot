@@ -79,11 +79,7 @@ void withMenu(void){
 
         if(key == 'd' ){
             displayText("solving maze");
-            //solveMaze();
-            //wallMaze();
-            // BlackLinetTurnLeft();
-            wallMaze();
-            // freeforward (1000);
+            solveMaze();
             displayMainMenu();
         }
  }
