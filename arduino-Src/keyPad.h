@@ -1,10 +1,10 @@
 #ifndef keyPad_h
     #define keyPad_h
-    #define GROUND_PIN  51
-    #define START       49
-    #define DOWN        47
-    #define UP          45
-    #define BACK        43
+    #define GROUND_PIN  50
+    #define START       48
+    #define DOWN        46
+    #define UP          44
+    #define BACK        42
     #define KEY_PRESS_DELAY 250
 
     void keypadInit(){
