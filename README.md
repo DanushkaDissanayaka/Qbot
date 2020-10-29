@@ -9,6 +9,3 @@ Arduino based multi funtional micro bot( 115mm)
 ## Robot Snapshot
 ![Robot final version](https://github.com/DanushkaDissanayaka/Qbot/blob/master/images/image1.jpg)
 ![Robot final version](https://github.com/DanushkaDissanayaka/Qbot/blob/master/images/image2.jpg)
-## PCB Snapshot
-![PCB Arduino Shield](https://github.com/DanushkaDissanayaka/Qbot/blob/master/images/SheeldV3.png)
-![PCB Motor Driver](https://github.com/DanushkaDissanayaka/Qbot/blob/master/images/Moror_Driver_and_Power_Board_v2.png)
